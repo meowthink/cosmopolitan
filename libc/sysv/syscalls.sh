@@ -27,7 +27,7 @@ dir=libc/sysv/calls
 #	                             Mac OS X┐  │              │   sys_ │ wrapped        │
 #	                                15.6+│  │              │ __sys_ │ wrapped twice  │
 #	                          FreeBSD┐   │  │              └─────────────────────────┘
-#	                              12+│   │  │
+#	                              11+│   │  │
 #	                       OpenBSD┐  │ ┌─│──│── XnuClass{1:Mach,2:Unix}
 #	                          6.4+│  │ │ │  │
 #	                     NetBSD┐  │  │ │ │  │
@@ -38,9 +38,9 @@ scall	sys_read		0x8038038032803800	globl hidden
 scall	sys_write		0x8048048042804801	globl hidden
 scall	sys_open		0x8058058052805802	globl hidden
 scall	sys_close		0x0060060062006003	globl hidden
-scall	__sys_stat		0x1b7026fff2152004	globl hidden # FreeBSD 11→12 fumble; use sys_fstatat(); blocked on Android
-scall	__sys_fstat		0x1b80352272153005	globl hidden # needs __stat2linux()
-scall	__sys_lstat		0x1b90280282154006	globl hidden # needs __stat2linux(); blocked on Android
+scall	__sys_stat		0x1b70260bc2152004	globl hidden # FreeBSD 11→12 fumble; use sys_fstatat(); blocked on Android
+scall	__sys_fstat		0x1b80350bd2153005	globl hidden # needs __stat2linux()
+scall	__sys_lstat		0x1b90280be2154006	globl hidden # needs __stat2linux(); blocked on Android
 scall	sys_poll		0x8d18fc8d128e6807	globl hidden
 scall	sys_ppoll		0xfff86da21ffff90f	globl hidden # consider INTON/INTOFF tutorial in examples/unbourne.c
 scall	sys_lseek		0x0c70c71de20c7008	globl hidden # netbsd+openbsd:evilpad
@@ -88,7 +88,7 @@ scall	sys_shutdown		0x0860860862086030	globl hidden
 scall	__sys_bind		0x0680680682068031	globl hidden
 scall	sys_listen		0x06a06a06a206a032	globl hidden
 scall	__sys_getsockname	0x0200200202020033	globl hidden
-scall	__sys_getpeername	0x01f01f08d201f034	globl hidden
+scall	__sys_getpeername	0x01f01f01f201f034	globl hidden
 scall	__sys_socketpair	0x0870870872087035	globl hidden
 scall	sys_setsockopt		0x0690690692069036	globl hidden
 scall	sys_getsockopt		0x0760760762076037	globl hidden
@@ -170,11 +170,11 @@ scall	sys_sigpending		0x124034157203407f	globl hidden # a.k.a. rt_sigpending on 
 scall	sys_sigsuspend		0x92686f955286f882	globl hidden # a.k.a. rt_sigsuspend on Linux; openbsd:byvalue, sigsuspend_nocancel on XNU
 scall	sys_sigaltstack		0x1191200352035083	globl hidden
 scall	sys_mknod		0x1c200e00e200e085	globl hidden
-scall	sys_mknodat		0x1cc14022fffff103	globl # no wrapper; FreeBSD 12+
+scall	sys_mknodat		0x1cc1401f2ffff103	globl # no wrapper; FreeBSD 12+
 scall	sys_mkfifo		0x0840840842084fff	globl hidden
 scall	sys_mkfifoat		0x1cb13f1f1fffffff	globl # no wrapper
-scall	sys_statfs		0x89d83fa2b2959889	globl hidden
-scall	sys_fstatfs		0x89e840a2c295a88a	globl hidden
+scall	sys_statfs		0x89d83f98c2959889	globl hidden
+scall	sys_fstatfs		0x89e84098d295a88a	globl hidden
 scall	sys_getpriority		0x064064064206408c	globl hidden
 scall	sys_setpriority		0x060060060206008d	globl hidden # modern nice()
 scall	sys_mlock		0x0cb0cb0cb20cb095	globl # no wrapper
@@ -294,7 +294,7 @@ scall	sys_utimes		0x1a404c08a208a0eb	globl hidden
 scall	sys_futimesat		0xffffff1eeffff105	globl hidden # @asyncsignalsafe
 scall	sys_futimes		0x1a704d0ce208bfff	globl hidden
 scall	sys_futimens		0x1d8055222fffffff	globl hidden
-scall	__sys_fstatat		0x1d202a22821d6106	globl hidden # a.k.a. newfstatat(); FreeBSD 12+; needs __stat2linux()
+scall	__sys_fstatat		0x1d202a1ed21d6106	globl hidden # a.k.a. newfstatat(); FreeBSD 12+; needs __stat2linux()
 scall	sys_unlinkat		0x1d71451f721d8107	globl hidden
 scall	sys_renameat		0x1ca1431f521d1108	globl hidden
 scall	sys_linkat		0x1c913d1ef21d7109	globl hidden
@@ -411,7 +411,7 @@ scall	sys_set_mempolicy_home_node 0xfffffffffffff1c2	globl # no wrapper
 #	Symbol                    ┌┴┐┌┴┐┌┴┐│┬┴┐┌┴┐      Directives & Commentary
 scall	sys_ktrace		0x02d02d02dfffffff	globl # no wrapper
 scall	sys_kqueue		0x15810d16a216afff	globl # no wrapper
-scall	sys_kevent		0x1b30482302171fff	globl # no wrapper
+scall	sys_kevent		0x1b304816b2171fff	globl # no wrapper
 scall	sys_revoke		0x0380380382038fff	globl # no wrapper
 scall	sys_setlogin		0xfff0320322032fff	globl # no wrapper
 scall	sys_getfh		0x18b0a10a120a1fff	globl # no wrapper
@@ -472,7 +472,7 @@ scall	sys_auditon		0xffffff1be215ffff	globl # no wrapper
 scall	sys_msgsys		0xffffff0aa20fcfff	globl # no wrapper
 scall	sys_shmsys		0xffffff0ab20fdfff	globl # no wrapper
 #─────────────────────FREEBSD & OPENBSD──────────────────────
-scall	sys_fhstat		0x1c3126229fffffff	globl # no wrapper
+scall	sys_fhstat		0x1c312612bfffffff	globl # no wrapper
 scall	sys_chflagsat		0xfff06b21cfffffff	globl # no wrapper
 scall	sys_profil		0x02c02c02cfffffff	globl # no wrapper
 scall	sys_fhstatfs		0xfff04122efffffff	globl # no wrapper

@@ -46,18 +46,17 @@ struct stat_xnu {
 };
 
 struct stat_freebsd {
-  uint64_t st_dev, st_ino, st_nlink;
-  uint16_t st_mode;
-  int16_t st_padding0;
+  uint32_t st_dev, st_ino;
+  uint16_t st_mode, st_nlink;
   uint32_t st_uid, st_gid;
-  int32_t st_padding1;
-  uint64_t st_rdev;
-  struct timespec st_atim, st_mtim, st_ctim, st_birthtim;
+  uint32_t st_rdev;
+  struct timespec st_atim, st_mtim, st_ctim;
   int64_t st_size, st_blocks;
   int32_t st_blksize;
   uint32_t st_flags;
-  uint64_t st_gen;
-  unsigned long st_spare[10];
+  uint32_t st_gen;
+  int32_t st_lspare;
+  struct timespec st_birthtim;
 };
 
 struct stat_openbsd {

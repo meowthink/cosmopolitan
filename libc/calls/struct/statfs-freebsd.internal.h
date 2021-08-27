@@ -25,8 +25,8 @@ struct statfs_freebsd {
   fsid_t f_fsid;            /* filesystem id */
   char f_charspare[80];     /* spare string space */
   char f_fstypename[16];    /* filesystem type name */
-  char f_mntfromname[1024]; /* mounted filesystem */
-  char f_mntonname[1024];   /* directory on which mounted */
+  char f_mntfromname[88]; /* mounted filesystem */
+  char f_mntonname[88];   /* directory on which mounted */
 };
 
 COSMOPOLITAN_C_END_
