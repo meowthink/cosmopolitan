@@ -256,9 +256,9 @@ server. You're welcome to join us! <https://discord.gg/FwAVVu7eJ4>
 | Intel           | Core        | 2006  |
 | Linux           | 2.6.18      | 2007  |
 | Windows         | 8 [1]       | 2012  |
-| Mac OS X        | 15.6        | 2018  |
+| Dawin           | 15.6        | 2016  |
 | OpenBSD         | 6.4         | 2018  |
-| FreeBSD         | 13          | 2020  |
+| FreeBSD         | 11          | 2016  |
 | NetBSD          | 9.2         | 2021  |
 
 [1] See our [vista branch](https://github.com/jart/cosmopolitan/tree/vista)

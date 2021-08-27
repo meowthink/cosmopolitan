@@ -167,7 +167,7 @@ void RewriteObject(const char *path) {
       SysExit(__COUNTER__ + 1, "mmap", path);
     }
     OptimizeRelocations(elf, st.st_size);
-    if (msync(elf, st.st_size, MS_ASYNC | MS_INVALIDATE)) {
+    if (msync(elf, st.st_size, MS_INVALIDATE)) {
       SysExit(__COUNTER__ + 1, "msync", path);
     }
     if (munmap(elf, st.st_size)) {

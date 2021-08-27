@@ -72,7 +72,7 @@ int Visit(const char *fpath, const struct stat *sb, int tflag,
 }
 
 int main(int argc, char *argv[]) {
-  if (!IsLinux()) return 0;
+  if (!IsLinux() && !IsBsd()) return 0;
   prog = argc > 0 ? argv[0] : "unbundle.com";
   if (IsDirectory("o/third_party/gcc")) return 0;
   makedirs("o/third_party", 0755);
